@@ -1,6 +1,6 @@
 #include <string>
-#ifndef SUBJECT_H
-#define SUBJECT_H
+#ifndef SUBJECT_HPP
+#define SUBJECT_HPP
 class SUBJECT
 {
     private:

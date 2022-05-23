@@ -1,8 +1,8 @@
 #include <string>
 #include <vector>
 #include <subject.hpp>
-#ifndef STUDENT_H
-#define STUDENT_H 
+#ifndef STUDENT_HPP
+#define STUDENT_HPP
 class STUDENT
 {
     private:

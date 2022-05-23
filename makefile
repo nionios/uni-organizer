@@ -1,9 +1,13 @@
 make:
-	g++ ./src/main.cpp\
- ./src/student/student.cpp ./src/student/operators.cpp\
+	g++\
+ ./src/main.cpp\
+ ./src/student/student.cpp\
+ ./src/student/operators.cpp\
  ./src/subject/subject.cpp\
- -o ex_3 -I ./include/student/ -I ./include/subject/
-	mv ex_3 ./bin/
+ -o $(ONAME) -I ./include/student/ -I ./include/subject/
+	mv $(ONAME) ./bin/
 run:
 	make
-	./bin/ex_3
+	./bin/$(ONAME)
+
+ONAME=uni_organizer_ex_3

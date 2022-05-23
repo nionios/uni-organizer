@@ -1,3 +1,4 @@
+#include <operators.hpp>
 #include <student.hpp>
 #include <subject.hpp>
 // Overloading operator for easy adding declared classes to student
@@ -12,7 +13,7 @@ void
 STUDENT::operator =
 (STUDENT &source_stud) {}
 
-inline bool
+bool
 operator ==
 (STUDENT stud_left, STUDENT stud_right) {
     if (stud_left.get_semester() == stud_right.get_semester())
@@ -20,7 +21,7 @@ operator ==
     else return false;
 }
 
-inline bool
+bool
 operator <
 (STUDENT stud_left, STUDENT stud_right) {
     if (stud_left.get_semester() < stud_right.get_semester())
@@ -28,25 +29,25 @@ operator <
     else return false;
 }
 
-inline bool
+bool
 operator !=
 (STUDENT stud_left, STUDENT stud_right) {
     return !operator==(stud_left,stud_right);
 }
 
-inline bool
+bool
 operator >
 (STUDENT stud_left, STUDENT stud_right) {
     return  operator< (stud_right,stud_left);
 }
 
-inline bool
+bool
 operator <=
 (STUDENT stud_left, STUDENT stud_right) {
     return !operator> (stud_left,stud_right);
 }
 
-inline bool
+bool
 operator >=
 (STUDENT stud_left, STUDENT stud_right) {
     return !operator< (stud_left,stud_right);
