@@ -2,10 +2,10 @@
 // AM: 18390126
 // Description: Program answering all questions of Exercise 3 in the Object
 //              Oriented Programming class in the University of West Attica.
-// Compilation command on my machine: Running "make" command in root dir of the
-//                                    exercise to make, "make run" to make the
-//                                    executables and run. It should run if g++
-//                                    is installed o the host machine.
+// Compilation command : Running "make" command in root dir of the
+//                       exercise to make, "make run" to make the
+//                       executables and run. It should run if g++
+//                       is installed on the host machine.
 // My machine specs: Arch Linux, kernel: 5.17.5-arch1-1, g++ (GCC) 11.2.0
 #include <iostream>
 #include <string>
@@ -24,8 +24,8 @@ std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector)
     return os;
 }
 
-// TODO: make constructors properly (new attributes added)
-int main (int argc, char **argv)
+int
+main (int argc, char **argv)
 {
     std::cout << "====== Exercise 3 =======" << std::endl;
     STUDENT stud_1("18390126","Dionisis Nikolopoulos",8);

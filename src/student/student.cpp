@@ -2,13 +2,38 @@
 #include <iostream>
 
 STUDENT::STUDENT
-(const char * input_AM,
+(const char  *input_AM,
  std::string  input_name,
- unsigned int input_semester)
+ unsigned int input_semester,
+ SUBJECT     *input_decl_subj,
+ SUBJECT     *input_subj,
+ float        input_grade)
 {
     AM       = input_AM;
     name     = input_name;
     semester = input_semester;
+    if (input_decl_subj) this->add_subject(input_decl_subj);
+    // if input_subj is NULL then do not set
+    if (input_subj) {
+        // Grade cannot be smaller than 0
+        if (input_grade > 0) {
+            this->set_passing_grade(input_subj, input_grade);
+        } else {
+            // Don't throw exception, this is a warning
+            std::cerr << "Warning: Input a grade number > 0, "
+                      << "passing grade for student "
+                      << input_name
+                      << " currently not set."
+                      << std::endl;
+        }
+    } else {
+        // Don't throw exception, this is a warning
+        std::cerr << "Warning: Input a valid subject pointer, "
+                  << "passing grade for student "
+                  << input_name
+                  << " currently not set."
+                  << std::endl;
+    }
 }
 
 // Constructor (overloaded) to duplicate another STUDENT object.
