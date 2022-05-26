@@ -4,7 +4,8 @@ make:
  ./src/student/student.cpp\
  ./src/student/operators.cpp\
  ./src/subject/subject.cpp\
- -o $(ONAME) -I ./include/student/ -I ./include/subject/
+ ./src/helpers/vector_printer.cpp\
+ -o $(ONAME) -I ./include/student/ -I ./include/subject/ -I ./include/helpers/
 	mv $(ONAME) ./bin/
 run:
 	make

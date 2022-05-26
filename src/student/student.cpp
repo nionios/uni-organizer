@@ -67,9 +67,35 @@ const char * STUDENT::get_AM (void)       {return AM;}
 std::string  STUDENT::get_name (void)     {return name;}
 unsigned int STUDENT::get_semester (void) {return semester;}
 
+/* Function that seaches for subject code or name * and returns the passing
+ * grade if the subject is passed by student*/
+float
+STUDENT::get_passing_grade
+(std::string search_term) {
+    if (passing_grade_list.empty())  {
+        std::cout << "Warning: Student "
+                  << this->get_name()
+                  << " has not passed any classes."
+                  << std::endl;
+        return 0;
+    } else {
+        for (auto & index : passing_grade_list) {
+            if (index.first->get_code() == search_term ||
+                index.first->get_name() == search_term)
+                return index.second;
+        }
+        std::cout << "Warning: Student "
+                  << this->get_name()
+                  << " has not passed this class."
+                  << std::endl;
+        return 0;
+    }
+}
+
 void STUDENT::set_passing_grade (SUBJECT* input_subj, float input_grade) {
-    passing_grade_list.first.push_back(input_subj);
-    passing_grade_list.second.push_back(input_grade);
+    // Create the pair and insert it into the list
+    std::pair <SUBJECT *, float>input_pair = {input_subj, input_grade};
+    passing_grade_list.push_back(input_pair);
 }
 void STUDENT::set_name (std::string input_name) {name = input_name;}
 void STUDENT::set_semester (unsigned int input_semester) {

@@ -9,14 +9,16 @@ class STUDENT
         const char * AM;
         std::string name;
         unsigned int semester;
-        std::pair <std::vector<SUBJECT *>, std::vector<float>>
-            passing_grade_list;
+        std::vector <std::pair <SUBJECT *, float>> passing_grade_list;
         std::vector<SUBJECT *> declared_subjects;
     public:
         // Constructor with a default values.
-        STUDENT ( const char * input_AM = "Unknown Student Code",
-                  std::string input_name = "Unnamed Student",
-                  unsigned int input_semester = 1);
+        STUDENT ( const char * input_AM        = "Unknown Student Code",
+                  std::string  input_name      = "Unnamed Student",
+                  unsigned int input_semester  = 1,
+                  SUBJECT     *input_decl_subj = NULL,
+                  SUBJECT     *input_subj      = NULL,
+                  float        input_grade     = -1);
         // Constructor (overloaded) to duplicate another STUDENT object.
         STUDENT (const STUDENT& source);
         /* Operators */
@@ -32,6 +34,7 @@ class STUDENT
         void set_name (std::string input_name);
         void set_semester (unsigned int input_semester);
         void set_passing_grade (SUBJECT* input_subj, float input_grade);
+        float get_passing_grade (std::string search_term);
         const char * get_AM (void);
         std::string get_name (void);
         unsigned int get_semester (void);

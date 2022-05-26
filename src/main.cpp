@@ -12,17 +12,7 @@
 #include <student.hpp>
 #include <subject.hpp>
 #include <operators.hpp>
-
-/*Helper to print all elements of a vector*/
-template <typename S>
-std::ostream& operator<<(std::ostream& os, const std::vector<S>& vector)
-{
-    // Printing all the elements using <<
-    for (auto element : vector) {
-        os << element << " ";
-    }
-    return os;
-}
+#include <vector_printer.hpp>
 
 int
 main (int argc, char **argv)
@@ -33,6 +23,7 @@ main (int argc, char **argv)
 
     SUBJECT dop("ICE-1001","Programming");
     SUBJECT oop("ICE-2001","Object Oriented Programming");
+    STUDENT stud_3("10101010","Binary Code Man",2000,&oop,&dop,10);
     stud_1 += &dop;
     stud_1 += &oop;
     std::vector<SUBJECT *> subjp = stud_1.get_decl_subj();
@@ -86,6 +77,12 @@ main (int argc, char **argv)
     std::cout << "stud_1 <= stud_2:" << std::endl;
     if (stud_1 <= stud_2) std::cout << " True" << std::endl;
     else std::cout << " False" << std::endl;
+
+    float searched_grade_1 = stud_1.get_passing_grade("ICE-2001");
+    std::cout << "Seached grade 1 is " << searched_grade_1 << std::endl;
+    float searched_grade_2 =
+        stud_1.get_passing_grade("Object Oriented Programming");
+    std::cout << "Seached grade 2 is " << searched_grade_2 << std::endl;
 
     std::cout << "====End of Exercise 3====" << std::endl;
     return 0;

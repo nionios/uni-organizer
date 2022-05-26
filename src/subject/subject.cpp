@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 
-SUBJECT::SUBJECT ( const char * input_code,
-        std::string input_name,
-        unsigned int input_semester) {
+SUBJECT::SUBJECT ( std::string input_code,
+                   std::string input_name,
+                   unsigned int input_semester) {
     code     = input_code;
     name     = input_name;
     semester = input_semester;
@@ -27,10 +27,10 @@ void SUBJECT::print_all (std::ostream &input_stream) {
 // Function to increment semester by +1
 void SUBJECT::inc_semester (void) { semester++; }
 // Setters and getters
-const char * SUBJECT::get_code (void) {return code;}
+std::string SUBJECT::get_code (void) {return code;}
 std::string SUBJECT::get_name (void) {return name;}
 unsigned int SUBJECT::get_semester (void) {return semester;}
-void SUBJECT::set_code (const char * input_code) {code = input_code;}
+void SUBJECT::set_code (std::string input_code) {code = input_code;}
 void SUBJECT::set_name (std::string input_name) {name = input_name;}
 void SUBJECT::set_semester (unsigned int input_semester) {
     semester = input_semester;
