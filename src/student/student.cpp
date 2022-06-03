@@ -12,26 +12,24 @@ STUDENT::STUDENT
     AM       = input_AM;
     name     = input_name;
     semester = input_semester;
-    if (input_decl_subj) this->add_subject(input_decl_subj);
     // if input_subj is NULL then do not set
+    if (input_decl_subj) this->add_subject(input_decl_subj);
+    // Don't throw exception, these are warnings
     if (input_subj) {
         // Grade cannot be smaller than 0
         if (input_grade > 0) {
             this->set_passing_grade(input_subj, input_grade);
         } else {
-            // Don't throw exception, this is a warning
             std::cerr << "Warning: Input a grade number > 0, "
                       << "passing grade for student "
                       << input_name
                       << " currently not set."
                       << std::endl;
         }
-    } else {
-        // Don't throw exception, this is a warning
-        std::cerr << "Warning: Input a valid subject pointer, "
-                  << "passing grade for student "
-                  << input_name
-                  << " currently not set."
+    //input_grade = -1 is the default value of grade (in place of empty)
+    } else if (!input_subj && input_grade != -1) {
+        std::cerr << "Warning: Cannot input grade without subject,"
+                  << " ignoring grade..."
                   << std::endl;
     }
 }
@@ -49,9 +47,11 @@ void
 STUDENT::print_all
 (std::ostream &input_stream)
 {
-    input_stream  << "> AM: "       << AM
-                  << " - Name: "    << name
-                  << " - Semester: "<< semester
+    input_stream  << "> AM: "             << AM
+                  << " - Name: "          << name
+                  << " - Semester: "      << semester
+                  << " - Passing Grades: "<< get_all_passing_grades()
+                  << " - Declared Subjects: "<< get_all_declared_subjects()
                   << std::endl;
 }
 
@@ -93,27 +93,26 @@ STUDENT::get_passing_grade
     }
 }
 
-// TODO: dont return empty string, return "no classes" or smth
 std::string STUDENT::get_all_passing_grades(void) {
-    std::string grades_string = "";
-    // Check if grade list is empty, if yes, return empty string
+    std::string grades_string= "";
+    // Check if grade list is empty, if not, fill it with the info
     if (!passing_grade_list.empty())  {
         for (auto & index : passing_grade_list) {
             grades_string += index.first->get_code() + " " +
                              std::to_string(index.second) + " ";
         }
-    }
+    } else grades_string = "No subjects passed";
     return grades_string;
 }
 
 std::string STUDENT::get_all_declared_subjects(void) {
     std::string subjects_string = "";
-    // Check if grade list is empty, if yes, return empty string
+    // Check if grade list is empty, if not, fill it with info
     if (!declared_subjects.empty())  {
         for (auto & index : declared_subjects) {
-            subjects_string += index->get_code();
+            subjects_string += index->get_code() + " ";
         }
-    }
+    } else subjects_string = "No subjects declared";
     return subjects_string;
 }
 

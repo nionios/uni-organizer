@@ -86,8 +86,8 @@ main (int argc, char **argv)
         stud_1.get_passing_grade("Object Oriented Programming");
     std::cout << "Seached grade 2 is " << searched_grade_2 << std::endl;
 
-    std::string encoded_stud_data = encode(stud_1);
-    std::string encoded_subj_data = encode(oop);
+    std::string encoded_stud_data = encode(&stud_1);
+    std::string encoded_subj_data = encode(&oop);
     save(encoded_stud_data);
     save(encoded_subj_data);
 

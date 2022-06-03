@@ -1,2 +1,5 @@
 # File for VIM CoC proper include detection
 .ccls
+# Save files
+student_data.txt
+subject_data.txt
