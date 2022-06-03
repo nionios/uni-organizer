@@ -20,7 +20,7 @@ save(std::string input_data) {
         return;
     }
     // Save subject and student data in different files
-    to_be_saved_data.open(filename + "_data.txt", std::ios::out);
+    to_be_saved_data.open(filename + "_data.txt", std::ios::app);
     if (!to_be_saved_data) {
         std::cout << filename + " data save failure." << std::endl;
     } else {

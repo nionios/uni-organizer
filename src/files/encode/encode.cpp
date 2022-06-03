@@ -12,10 +12,8 @@ encode(STUDENT * input_student) {
         std::string(input_student->get_AM()) + "\n" +
         input_student->get_name() + "\n" +
         std::to_string(input_student->get_semester()) + "\n" +
-        // FIXME: these 2 lines do not work properly
         input_student->get_all_passing_grades() + "\n" +
-        input_student->get_all_declared_subjects() + "\n" +
-        "* STUDENT ENTRY END";
+        input_student->get_all_declared_subjects() + "\n";
     return encoded_student_info;
 }
 // Overload for subject too

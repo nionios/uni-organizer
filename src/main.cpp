@@ -12,9 +12,7 @@
 #include <student.hpp>
 #include <subject.hpp>
 #include <operators.hpp>
-#include <vector_printer.hpp>
-#include <encode.hpp>
-#include <save.hpp>
+#include <uni_organizer_helpers.hpp>
 
 int
 main (int argc, char **argv)
@@ -86,10 +84,11 @@ main (int argc, char **argv)
         stud_1.get_passing_grade("Object Oriented Programming");
     std::cout << "Seached grade 2 is " << searched_grade_2 << std::endl;
 
-    std::string encoded_stud_data = encode(&stud_1);
-    std::string encoded_subj_data = encode(&oop);
-    save(encoded_stud_data);
-    save(encoded_subj_data);
+    archive(&stud_1);
+    archive(&stud_2);
+    archive(&stud_3);
+    archive(&oop);
+    archive(&dop);
 
     std::cout << "====End of Exercise 3====" << std::endl;
     return 0;

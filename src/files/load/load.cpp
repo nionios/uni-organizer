@@ -3,23 +3,22 @@
 #include <string>
 // Code by Dennis Nikolopoulos
 // AM: 18390126
-// Description: function to save all student data to disk
+// Description: function to load selected data file from disk
 
 std::string
-load(void) {
-    std::fstream student_data;
-    std::string loaded_student_data;
-    student_data.open("student_data.txt", std::ios::in);
-    if (!student_data) {
-        std::cout << "* Student data load failure.";
+load(std::string filename) {
+    std::fstream data;
+    std::string loaded_data;
+    data.open(filename, std::ios::in);
+    if (!data) {
+        std::cout << "* Data load from file " << filename << " failed.";
     } else {
         while (1) {
-            student_data >> loaded_student_data;
-            if (student_data.eof())
-                break;
+            data >> loaded_data;
+            if (data.eof()) break;
         }
-        std::cout << "* Student data loaded successfully!";
-        student_data.close();
+        std::cout << "* Data load from file " << filename << " completed!";
+        data.close();
     }
-    return loaded_student_data;
+    return loaded_data;
 }
