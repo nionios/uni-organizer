@@ -5,7 +5,17 @@ make:
  ./src/student/operators.cpp\
  ./src/subject/subject.cpp\
  ./src/helpers/vector_printer.cpp\
- -o $(ONAME) -I ./include/student/ -I ./include/subject/ -I ./include/helpers/
+ ./src/files/load/load.cpp\
+ ./src/files/save/save.cpp\
+ ./src/files/encode/encode.cpp\
+ -I./include/student/\
+ -I./include/subject/\
+ -I./include/helpers/\
+ -I./include/files/load/\
+ -I./include/files/save/\
+ -I./include/files/encode/\
+ -I./include/files/decode/\
+ -o $(ONAME)
 	mv $(ONAME) ./bin/
 run:
 	make

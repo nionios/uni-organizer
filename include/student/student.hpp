@@ -34,6 +34,8 @@ class STUDENT
         void set_name (std::string input_name);
         void set_semester (unsigned int input_semester);
         void set_passing_grade (SUBJECT* input_subj, float input_grade);
+        std::string get_all_passing_grades(void);
+        std::string get_all_declared_subjects(void);
         float get_passing_grade (std::string search_term);
         const char * get_AM (void);
         std::string get_name (void);

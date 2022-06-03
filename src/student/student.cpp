@@ -36,6 +36,7 @@ STUDENT::STUDENT
     }
 }
 
+//TODO: lists update this too (passing grades)
 // Constructor (overloaded) to duplicate another STUDENT object.
 //(delegate constructor)
 STUDENT::STUDENT
@@ -90,6 +91,30 @@ STUDENT::get_passing_grade
                   << std::endl;
         return 0;
     }
+}
+
+// TODO: dont return empty string, return "no classes" or smth
+std::string STUDENT::get_all_passing_grades(void) {
+    std::string grades_string = "";
+    // Check if grade list is empty, if yes, return empty string
+    if (!passing_grade_list.empty())  {
+        for (auto & index : passing_grade_list) {
+            grades_string += index.first->get_code() + " " +
+                             std::to_string(index.second) + " ";
+        }
+    }
+    return grades_string;
+}
+
+std::string STUDENT::get_all_declared_subjects(void) {
+    std::string subjects_string = "";
+    // Check if grade list is empty, if yes, return empty string
+    if (!declared_subjects.empty())  {
+        for (auto & index : declared_subjects) {
+            subjects_string += index->get_code();
+        }
+    }
+    return subjects_string;
 }
 
 void STUDENT::set_passing_grade (SUBJECT* input_subj, float input_grade) {
