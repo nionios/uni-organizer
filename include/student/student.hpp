@@ -19,6 +19,13 @@ class STUDENT
                   SUBJECT     *input_decl_subj = NULL,
                   SUBJECT     *input_subj      = NULL,
                   float        input_grade     = -1);
+        // Constructor (overloaded) to input the lists too (for ex. in case of
+        // loading from disk, this constructor is called)
+        STUDENT (const char  *input_AM,
+                std::string  input_name,
+                unsigned int input_semester,
+                std::vector <std::pair <SUBJECT *, float>> input_passing_grade_list,
+                std::vector<SUBJECT *> input_declared_subjects);
         // Constructor (overloaded) to duplicate another STUDENT object.
         STUDENT (const STUDENT& source);
         /* Operators */

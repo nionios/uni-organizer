@@ -34,6 +34,20 @@ STUDENT::STUDENT
     }
 }
 
+// Overloaded to input whole lists (for ex. in case of loading from disk)
+STUDENT::STUDENT
+(const char  *input_AM,
+ std::string  input_name,
+ unsigned int input_semester,
+ std::vector <std::pair <SUBJECT *, float>> input_passing_grade_list,
+ std::vector<SUBJECT *> input_declared_subjects) {
+    AM       = input_AM;
+    name     = input_name;
+    semester = input_semester;
+    passing_grade_list = input_passing_grade_list;
+    declared_subjects = input_declared_subjects;
+}
+
 //TODO: lists update this too (passing grades)
 // Constructor (overloaded) to duplicate another STUDENT object.
 //(delegate constructor)

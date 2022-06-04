@@ -8,7 +8,7 @@
 std::string
 encode(STUDENT * input_student) {
     std::string encoded_student_info =
-        std::string("* STUDENT ENTRY START\n") +
+        std::string("* STUDENT ENTRY\n") +
         std::string(input_student->get_AM()) + "\n" +
         input_student->get_name() + "\n" +
         std::to_string(input_student->get_semester()) + "\n" +
@@ -20,10 +20,9 @@ encode(STUDENT * input_student) {
 std::string
 encode(SUBJECT * input_subject) {
     std::string encoded_subject_info =
-        "* SUBJECT ENTRY START\n" +
+        "* SUBJECT ENTRY\n" +
         input_subject->get_code() + "\n" +
         input_subject->get_name() + "\n" +
-        std::to_string(input_subject->get_semester()) + "\n" +
-        "* SUBJECT ENTRY END";
+        std::to_string(input_subject->get_semester()) + "\n";
     return encoded_subject_info;
 }

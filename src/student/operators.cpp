@@ -1,5 +1,6 @@
 #include <operators.hpp>
 #include <student.hpp>
+#include <iostream>
 #include <subject.hpp>
 // Overloading operator for easy adding declared classes to student
 void
@@ -12,6 +13,11 @@ STUDENT::operator +=
 void
 STUDENT::operator =
 (STUDENT &source_stud) {}
+
+template <typename S>
+std::ostream& operator<<(std::ostream& os, STUDENT &stud) {
+    stud.print_all(os);
+}
 
 bool
 operator ==
