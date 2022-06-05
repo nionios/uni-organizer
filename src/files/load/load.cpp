@@ -7,18 +7,16 @@
 
 std::string
 load(std::string filename) {
-    std::fstream data;
+    std::fstream data(filename, std::fstream::in);
     std::string loaded_data;
-    data.open(filename, std::ios::in);
+    //data.open(filename, std::ios::in);
     if (!data) {
         std::cout << "* Data load from file " << filename << " failed.";
     } else {
-        while (1) {
-            data >> loaded_data;
-            if (data.eof()) break;
-        }
+        getline(data, loaded_data, '\0');
         std::cout << "* Data load from file " << filename << " completed!";
-        data.close();
     }
+    data.close();
+    std::cout << "loaded data is :\n" + loaded_data << std::endl;
     return loaded_data;
 }

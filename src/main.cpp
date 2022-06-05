@@ -18,22 +18,28 @@ int
 main (int argc, char **argv)
 {
     std::cout << "====== Exercise 3 =======" << std::endl;
-//    STUDENT stud_1("18390126","Dionisis Nikolopoulos",8);
-//    STUDENT stud_2("12601839","Nionios Dionisopoulos");
-//
-//    SUBJECT dop("ICE-1001","Programming");
-//    SUBJECT oop("ICE-2001","Object Oriented Programming");
+    SUBJECT dop("ICE-1001","Programming");
+    SUBJECT oop("ICE-2001","Object Oriented Programming");
+//    std::vector<SUBJECT *> subject_list;
+//    subject_list.push_back(&dop);
+//    subject_list.push_back(&oop);
+/* for saving
+    STUDENT stud_1("18390126","Dionisis Nikolopoulos",8);
+    STUDENT stud_2("12601839","Nionios Dionisopoulos");
+    STUDENT stud_3("10101010","Binary Code Man",2000,&oop,&dop,10);
+    archive(&stud_1);
+    archive(&stud_2);
+    archive(&stud_3);
+    archive(&oop);
+    archive(&dop); 
+*/
 //
     std::vector<SUBJECT> subject_list = gather_subjects();
     std::vector<STUDENT> student_list = gather_students(subject_list);
     // FIXME: this segfaults!
-    for (auto stud : student_list) stud.print_all(std::cout);
+//    for (auto stud : student_list) stud.print_all(std::cout);
 /*
-    STUDENT stud_3("10101010","Binary Code Man",2000,&oop,&dop,10);
 
-    std::vector<SUBJECT *> subject_list;
-    subject_list.push_back(&dop);
-    subject_list.push_back(&oop);
 
     stud_1 += &dop;
     stud_1 += &oop;
@@ -94,12 +100,7 @@ main (int argc, char **argv)
     float searched_grade_2 =
         stud_1.get_passing_grade("Object Oriented Programming");
     std::cout << "Seached grade 2 is " << searched_grade_2 << std::endl;
-
-    archive(&stud_1);
-    archive(&stud_2);
-    archive(&stud_3);
-    archive(&oop);
-    archive(&dop); */
+*/
 
     std::cout << "====End of Exercise 3====" << std::endl;
     return 0;

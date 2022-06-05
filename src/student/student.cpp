@@ -90,7 +90,7 @@ STUDENT::get_passing_grade
     if (passing_grade_list.empty())  {
         std::cout << "Warning: Student "
                   << this->get_name()
-                  << " has not passed any classes."
+                  << " has not passed any subjects."
                   << std::endl;
         return 0;
     } else {
@@ -101,7 +101,7 @@ STUDENT::get_passing_grade
         }
         std::cout << "Warning: Student "
                   << this->get_name()
-                  << " has not passed this class."
+                  << " has not passed this subject."
                   << std::endl;
         return 0;
     }
@@ -109,11 +109,16 @@ STUDENT::get_passing_grade
 
 std::string STUDENT::get_all_passing_grades(void) {
     std::string grades_string= "";
+    // Just to avoid space before first word on grades_string
+    bool first = true;
     // Check if grade list is empty, if not, fill it with the info
     if (!passing_grade_list.empty())  {
         for (auto & index : passing_grade_list) {
+            // Avoid space on first word but input before every other one
+            if (!first) grades_string += " ";
+            first = false;
             grades_string += index.first->get_code() + " " +
-                             std::to_string(index.second) + " ";
+                             std::to_string(index.second);
         }
     } else grades_string = "No subjects passed";
     return grades_string;
@@ -121,10 +126,15 @@ std::string STUDENT::get_all_passing_grades(void) {
 
 std::string STUDENT::get_all_declared_subjects(void) {
     std::string subjects_string = "";
+    // Just to avoid space before first word on grades_string
+    bool first = true;
     // Check if grade list is empty, if not, fill it with info
     if (!declared_subjects.empty())  {
         for (auto & index : declared_subjects) {
-            subjects_string += index->get_code() + " ";
+            // Avoid space on first word but input before every other one
+            if (!first) subjects_string += " ";
+            first = false;
+            subjects_string += index->get_code();
         }
     } else subjects_string = "No subjects declared";
     return subjects_string;

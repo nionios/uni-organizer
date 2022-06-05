@@ -15,7 +15,7 @@ gather_students
     std::string loaded_data_block;
     std::vector<STUDENT> loaded_student_list;
     // Split scanned loaded data into blocks, delimiter is '*' in
-    // "* STUDENT ENTRY"
+    // "* STUDENT ENTRY END"
     while (std::getline(scanned_loaded_data, loaded_data_block, '*')) {
         STUDENT loaded_stud = interpret_student(loaded_data_block,
                                                 initialized_subject_list);
@@ -27,12 +27,12 @@ gather_students
 std::vector<SUBJECT>
 gather_subjects
 (void) {
-    std::string loaded_data = load("student_data.txt");
+    std::string loaded_data = load("subject_data.txt");
     std::istringstream scanned_loaded_data(loaded_data);
     std::string loaded_data_block;
     std::vector<SUBJECT> loaded_subject_list;
     // Split scanned loaded data into blocks, delimiter is '*' in
-    // "* SUBJECT ENTRY"
+    // "* SUBJECT ENTRY END"
     while (std::getline(scanned_loaded_data, loaded_data_block, '*')) {
         SUBJECT loaded_subj = interpret_subject(loaded_data_block);
         loaded_subject_list.push_back(loaded_subj);

@@ -25,7 +25,7 @@ STUDENT
 interpret_student
 (std::string input_data_block,
  std::vector<SUBJECT> initialized_subject_list) {
-    std::string line_of_data;
+    std::string str_of_data;
     int step = 0;
     const char * AM;
     std::string name;
@@ -33,29 +33,32 @@ interpret_student
     std::vector <std::pair <SUBJECT *, float>> passing_grade_list;
     std::vector<SUBJECT *> declared_subjects;
 
+    // DEBUG:
+    std::cout << "Input data block is :\n" + input_data_block << std::endl;
+
     std::istringstream scanned(input_data_block);
-    while (std::getline(scanned, line_of_data)) {
+    while (std::getline(scanned, str_of_data, '/')) {
+    std::cout << "str of data block:\n" + str_of_data << std::endl;
         switch (step) {
             case 0:
-                //Here we should have "* STUDENT ENTRY", skip this line
+                AM = str_of_data.c_str();
                 break;
             case 1:
-                AM = line_of_data.c_str();
+                name = str_of_data;
                 break;
             case 2:
-                name = line_of_data;
-                break;
-            case 3:
                 // We are converiting String to unsigned int, so we need 64 bits
                 // not 32, so we use atoll() instead of atoi.
-                semester = atoll(line_of_data.c_str());
+                semester = atoll(str_of_data.c_str());
                 break;
-            case 4:
+            case 3:
                 { // Braces to limit scope within this case
+                // If no classes are passed, skip this line
+                if (str_of_data == "No subjects passed") break;
                 int substep = 0;
                 // Split the line of data into multiple words (separator is
                 // whitespace)
-                std::istringstream scanned_grade_words(line_of_data);
+                std::istringstream scanned_grade_words(str_of_data);
                 std::string word;
                 std::pair<SUBJECT *,float> inserted_pair;
                 while (scanned_grade_words >> word) {
@@ -63,8 +66,9 @@ interpret_student
                     if (substep%2 == 1) {
                         SUBJECT * retrieved_subj = search_subject_list(word,
                                                     initialized_subject_list);
-                        if (retrieved_subj) inserted_pair.first =
-                            retrieved_subj;
+                        if (retrieved_subj) {
+                            inserted_pair.first = retrieved_subj;
+                        }
                         // If res == NULL then subject was not initialized.
                         // the data is formatted wrongly. Stop trying to
                         // interpret
@@ -73,8 +77,14 @@ interpret_student
                     } else {
                         try {
                             // Convert grade in string to float and put into
-                            // inserted pai
-                            inserted_pair.second = std::stof(line_of_data);
+                            // inserted pair
+                            char * end;
+                            inserted_pair.second =
+                                std::strtof(str_of_data.c_str(), &end);
+                            if (*end != 0) {
+                                throw std::invalid_argument
+                                    ("Invalid grade format on student.txt");
+                            }
                             // If an exception has not occured, we have a
                             // number, but we check the grade one more time to
                             // make sure it is in 0-10 range
@@ -84,7 +94,7 @@ interpret_student
                                 passing_grade_list.push_back(inserted_pair);
                             }
                         } catch (const std::invalid_argument ex) {
-                            std::cerr << "Invalid grade on student_data.txt"
+                            std::cerr << "Exception occured: " << ex.what()
                                       << std::endl;
                             return NULL;
                         }
@@ -93,10 +103,12 @@ interpret_student
                 }
                 break;
                 }
-            case 5:
+            case 4:
+                // If no subjects are declared, skip this line
+                if (str_of_data == "No subjects declared") break;
                 // Split the line of data into multiple words (separator is
                 // whitespace)
-                std::istringstream scanned_subj_words(line_of_data);
+                std::istringstream scanned_subj_words(str_of_data);
                 std::string word;
                 while (scanned_subj_words >> word) {
                     SUBJECT * retrieved_subj = search_subject_list(word,
@@ -113,7 +125,7 @@ interpret_student
         step++;
     }
     // If this whole process ends without errors, create the student object and
-    // return it
+    // return it. Firtly determine what constructor to call
     STUDENT interpreted_student
         (AM, name, semester, passing_grade_list, declared_subjects);
     return interpreted_student;
@@ -122,30 +134,30 @@ interpret_student
 SUBJECT
 interpret_subject
 (std::string input_data_block) {
-    std::string line_of_data;
+    std::string str_of_data;
     int step = 0;
     std::string code;
     std::string name;
     unsigned int semester;
     std::istringstream scanned(input_data_block);
-    while (std::getline(scanned, line_of_data)) {
+    // Delimiter is '/'
+    while (std::getline(scanned, str_of_data,'/')) {
         switch (step) {
             case 0:
+                code = str_of_data;
                 break;
             case 1:
-                code = line_of_data;
+                name = str_of_data;
                 break;
             case 2:
-                name = line_of_data;
-                break;
-            case 3:
                 // We are converiting String to unsigned int, so we need 64 bits
                 // not 32, so we use atoll() instead of atoi.
-                semester = atoll(line_of_data.c_str());
+                semester = atoll(str_of_data.c_str());
                 break;
         }
+        step++;
     }
     // If no errors have occured up until now, create and return subject object
-    SUBJECT interpreted_subject(code,name,semester);
+    SUBJECT interpreted_subject(code, name, semester);
     return interpreted_subject;
 }
