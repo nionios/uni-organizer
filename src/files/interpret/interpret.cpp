@@ -7,13 +7,13 @@
 SUBJECT *
 search_subject_list
 (std::string input_word,
- std::vector<SUBJECT *> initialized_subject_list) {
+ std::vector<SUBJECT> initialized_subject_list) {
     for (auto & index : initialized_subject_list) {
         // If the archived code matches an initialized subject (from
         // our main function, passed through the
         // initialized_subject_list) then return the pointer to subject
-        if (index->get_code() == input_word)
-            return index;
+        if (index.get_code() == input_word)
+            return &index;
     }
     // If subject is not found, return null pointer
     return NULL;
@@ -24,7 +24,7 @@ search_subject_list
 STUDENT
 interpret_student
 (std::string input_data_block,
- std::vector<SUBJECT *> initialized_subject_list) {
+ std::vector<SUBJECT> initialized_subject_list) {
     std::string line_of_data;
     int step = 0;
     const char * AM;
@@ -121,8 +121,8 @@ interpret_student
 
 SUBJECT
 interpret_subject
-(std::string input_data_block,
- std::string line_of_data) {
+(std::string input_data_block) {
+    std::string line_of_data;
     int step = 0;
     std::string code;
     std::string name;

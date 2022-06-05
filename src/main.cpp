@@ -24,8 +24,11 @@ main (int argc, char **argv)
 //    SUBJECT dop("ICE-1001","Programming");
 //    SUBJECT oop("ICE-2001","Object Oriented Programming");
 //
-    gather(stud_3);
-
+    std::vector<SUBJECT> subject_list = gather_subjects();
+    std::vector<STUDENT> student_list = gather_students(subject_list);
+    // FIXME: this segfaults!
+    for (auto stud : student_list) stud.print_all(std::cout);
+/*
     STUDENT stud_3("10101010","Binary Code Man",2000,&oop,&dop,10);
 
     std::vector<SUBJECT *> subject_list;
@@ -96,7 +99,7 @@ main (int argc, char **argv)
     archive(&stud_2);
     archive(&stud_3);
     archive(&oop);
-    archive(&dop);
+    archive(&dop); */
 
     std::cout << "====End of Exercise 3====" << std::endl;
     return 0;

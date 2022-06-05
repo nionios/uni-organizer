@@ -5,9 +5,10 @@
 #define interpret_HPP
 STUDENT
 interpret_student
-(std::string input_data, std::vector<SUBJECT *> initialized_subject_list);
+(std::string input_data_block,
+ std::vector<SUBJECT> initialized_subject_list);
 
 SUBJECT
 interpret_subject
-(std::string input_data, std::vector<SUBJECT *> initialized_subject_list);
+(std::string input_data_block);
 #endif

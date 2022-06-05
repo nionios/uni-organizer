@@ -6,6 +6,7 @@ make:
  ./src/subject/subject.cpp\
  ./src/helpers/vector_printer.cpp\
  ./src/helpers/archive.cpp\
+ ./src/helpers/gather.cpp\
  ./src/files/load/load.cpp\
  ./src/files/save/save.cpp\
  ./src/files/encode/encode.cpp\
