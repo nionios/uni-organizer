@@ -40,7 +40,6 @@ main (int argc, char **argv)
 //    for (auto stud : student_list) stud.print_all(std::cout);
 /*
 
-
     stud_1 += &dop;
     stud_1 += &oop;
     std::vector<SUBJECT *> subjp = stud_1.get_decl_subj();

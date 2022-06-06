@@ -48,23 +48,33 @@ STUDENT::STUDENT
     declared_subjects = input_declared_subjects;
 }
 
-//TODO: lists update this too (passing grades)
 // Constructor (overloaded) to duplicate another STUDENT object.
 //(delegate constructor)
 STUDENT::STUDENT
 (const STUDENT &source) : STUDENT (source.AM,
                                    source.name,
-                                   source.semester) {}
+                                   source.semester,
+                                   source.passing_grade_list,
+                                   source.declared_subjects) {}
+
+// Overloading operator for easy adding declared classes to student
+void STUDENT::operator = (STUDENT stud_right) {
+    this->set_AM(stud_right.get_AM());
+    this->set_name(stud_right.get_name());
+    this->set_semester(stud_right.get_semester());
+    this->set_passing_grade_list(stud_right.get_passing_grade_list());
+    this->set_declared_subjects_list(stud_right.get_declared_subjects_list());
+}
 
 // Function to print all attributes to ostream
 void
 STUDENT::print_all
 (std::ostream &input_stream)
 {
-    input_stream  << "> AM: "             << AM
-                  << " - Name: "          << name
-                  << " - Semester: "      << semester
-                  << " - Passing Grades: "<< get_all_passing_grades()
+    input_stream  << "> AM: "                << AM
+                  << " - Name: "             << name
+                  << " - Semester: "         << semester
+                  << " - Passing Grades: "   << get_all_passing_grades()
                   << " - Declared Subjects: "<< get_all_declared_subjects()
                   << std::endl;
 }
@@ -81,7 +91,21 @@ void STUDENT::add_subject (SUBJECT * input_subj) {
 const char * STUDENT::get_AM (void)       {return AM;}
 std::string  STUDENT::get_name (void)     {return name;}
 unsigned int STUDENT::get_semester (void) {return semester;}
+std::vector<std::pair<SUBJECT *, float>> STUDENT::get_passing_grade_list (void) {
+    return passing_grade_list;
+}
+std::vector<SUBJECT *> STUDENT::get_declared_subjects_list (void) {
+    return declared_subjects;
+}
 
+void STUDENT::set_passing_grade_list
+(std::vector<std::pair<SUBJECT *, float>> input_passing_grade_list) {
+    passing_grade_list = input_passing_grade_list;
+}
+void STUDENT::set_declared_subjects_list
+(std::vector<SUBJECT *> input_declared_subjects) {
+    declared_subjects = input_declared_subjects;
+}
 /* Function that seaches for subject code or name * and returns the passing
  * grade if the subject is passed by student*/
 float
@@ -145,6 +169,7 @@ void STUDENT::set_passing_grade (SUBJECT* input_subj, float input_grade) {
     std::pair <SUBJECT *, float>input_pair = {input_subj, input_grade};
     passing_grade_list.push_back(input_pair);
 }
+void STUDENT::set_AM (const char * input_AM) {AM = input_AM;}
 void STUDENT::set_name (std::string input_name) {name = input_name;}
 void STUDENT::set_semester (unsigned int input_semester) {
     semester = input_semester;
