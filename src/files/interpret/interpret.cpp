@@ -33,12 +33,8 @@ interpret_student
     std::vector <std::pair <SUBJECT *, float>> passing_grade_list;
     std::vector<SUBJECT *> declared_subjects;
 
-    // DEBUG:
-    std::cout << "Input data block is :\n" + input_data_block << std::endl;
-
     std::istringstream scanned(input_data_block);
     while (std::getline(scanned, str_of_data, '/')) {
-    std::cout << "str of data block:\n" + str_of_data << std::endl;
         switch (step) {
             case 0:
                 AM = str_of_data.c_str();
@@ -55,7 +51,8 @@ interpret_student
                 { // Braces to limit scope within this case
                 // If no classes are passed, skip this line
                 if (str_of_data == "No subjects passed") break;
-                int substep = 0;
+                // Start from one since we are checking odd/even numbers
+                int substep = 1;
                 // Split the line of data into multiple words (separator is
                 // whitespace)
                 std::istringstream scanned_grade_words(str_of_data);
@@ -79,8 +76,9 @@ interpret_student
                             // Convert grade in string to float and put into
                             // inserted pair
                             char * end;
+                            // FIXME: this does not scan floats correctly
                             inserted_pair.second =
-                                std::strtof(str_of_data.c_str(), &end);
+                                std::strtof(word.c_str(), &end);
                             if (*end != 0) {
                                 throw std::invalid_argument
                                     ("Invalid grade format on student.txt");

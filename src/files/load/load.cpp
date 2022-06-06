@@ -11,12 +11,13 @@ load(std::string filename) {
     std::string loaded_data;
     //data.open(filename, std::ios::in);
     if (!data) {
-        std::cout << "* Data load from file " << filename << " failed.";
+        std::cout << "* Data load from file " << filename << " failed."
+                  << std::endl;
     } else {
         getline(data, loaded_data, '\0');
-        std::cout << "* Data load from file " << filename << " completed!";
+        std::cout << "* Data load from file " << filename << " completed!"
+                  << std::endl;
     }
     data.close();
-    std::cout << "loaded data is :\n" + loaded_data << std::endl;
     return loaded_data;
 }
