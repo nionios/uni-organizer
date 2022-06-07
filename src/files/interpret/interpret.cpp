@@ -3,6 +3,7 @@
 #include <iostream>
 #include <student.hpp>
 #include <subject.hpp>
+#include <exceptions.hpp>
 
 SUBJECT *
 search_subject_list
@@ -12,10 +13,10 @@ search_subject_list
         // If the archived code matches an initialized subject (from
         // our main function, passed through the
         // initialized_subject_list) then return the pointer to subject
-        if (index.get_code() == input_word)
-            return &index;
+        if (index.get_code() == input_word) return &index;
     }
     // If subject is not found, return null pointer
+    std::cout << "Returning NULL" << std::endl;
     return NULL;
 }
 
@@ -27,17 +28,17 @@ interpret_student
  std::vector<SUBJECT> initialized_subject_list) {
     std::string str_of_data;
     int step = 0;
-    const char * AM;
+    std::string AM;
     std::string name;
     unsigned int semester;
     std::vector <std::pair <SUBJECT *, float>> passing_grade_list;
     std::vector<SUBJECT *> declared_subjects;
-
     std::istringstream scanned(input_data_block);
+
     while (std::getline(scanned, str_of_data, '/')) {
         switch (step) {
             case 0:
-                AM = str_of_data.c_str();
+                AM = str_of_data;
                 break;
             case 1:
                 name = str_of_data;
@@ -50,7 +51,7 @@ interpret_student
             case 3:
                 { // Braces to limit scope within this case
                 // If no classes are passed, skip this line
-                if (str_of_data == "No subjects passed") break;
+                if (str_of_data == "No_subjects_passed") break;
                 // Start from one since we are checking odd/even numbers
                 int substep = 1;
                 // Split the line of data into multiple words (separator is
@@ -61,15 +62,15 @@ interpret_student
                 while (scanned_grade_words >> word) {
                     // In odd steps we should be looking at subject codes.
                     if (substep%2 == 1) {
-                        SUBJECT * retrieved_subj = search_subject_list(word,
-                                                    initialized_subject_list);
+                        SUBJECT * retrieved_subj = search_subject_list
+                            (word, initialized_subject_list);
                         if (retrieved_subj) {
                             inserted_pair.first = retrieved_subj;
                         }
                         // If res == NULL then subject was not initialized.
                         // the data is formatted wrongly. Stop trying to
                         // interpret
-                        else return NULL;
+                        else throw invalid_student_data();
                     // In even steps we should be looking at subject grades
                     } else {
                         try {
@@ -94,7 +95,7 @@ interpret_student
                         } catch (const std::invalid_argument ex) {
                             std::cerr << "Exception occured: " << ex.what()
                                       << std::endl;
-                            return NULL;
+                            throw invalid_student_data();
                         }
                     }
                     substep++;
@@ -103,7 +104,7 @@ interpret_student
                 }
             case 4:
                 // If no subjects are declared, skip this line
-                if (str_of_data == "No subjects declared") break;
+                if (str_of_data == "No_subjects_declared\n") break;
                 // Split the line of data into multiple words (separator is
                 // whitespace)
                 std::istringstream scanned_subj_words(str_of_data);
@@ -111,12 +112,12 @@ interpret_student
                 while (scanned_subj_words >> word) {
                     SUBJECT * retrieved_subj = search_subject_list(word,
                                                  initialized_subject_list);
-                    if (retrieved_subj)
+                    /* If res == NULL then subject was not initialized.
+                     * the data is formatted wrongly. Stop trying to
+                     * interpret, throw exception subject_mismatch */
+                    if (retrieved_subj) {
                         declared_subjects.push_back(retrieved_subj);
-                    // If res == NULL then subject was not initialized.
-                    // the data is formatted wrongly. Stop trying to
-                    // interpret
-                    else return NULL;
+                    } else throw subject_mismatch();
                 }
                 break;
         }
@@ -124,6 +125,7 @@ interpret_student
     }
     // If this whole process ends without errors, create the student object and
     // return it. Firtly determine what constructor to call
+    //
     STUDENT interpreted_student
         (AM, name, semester, passing_grade_list, declared_subjects);
     return interpreted_student;
@@ -151,6 +153,9 @@ interpret_subject
                 // We are converiting String to unsigned int, so we need 64 bits
                 // not 32, so we use atoll() instead of atoi.
                 semester = atoll(str_of_data.c_str());
+                if (semester < 0 && semester > 10) {
+                    throw invalid_subject_data();
+                }
                 break;
         }
         step++;

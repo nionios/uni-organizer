@@ -11,6 +11,7 @@ make:
  ./src/files/save/save.cpp\
  ./src/files/encode/encode.cpp\
  ./src/files/interpret/interpret.cpp\
+ ./src/exceptions/exceptions.cpp\
  -I./include/student/\
  -I./include/subject/\
  -I./include/helpers/\
@@ -18,6 +19,7 @@ make:
  -I./include/files/save/\
  -I./include/files/encode/\
  -I./include/files/interpret/\
+ -I./include/exceptions/\
  -o $(ONAME)
 	mv $(ONAME) ./bin/
 run:
