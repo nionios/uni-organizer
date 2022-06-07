@@ -10,7 +10,7 @@
 
 std::vector<STUDENT>
 gather_students
-(std::vector<SUBJECT> initialized_subject_list) {
+(std::vector<SUBJECT *> initialized_subject_list) {
     std::string loaded_data = load("student_data.txt");
     std::istringstream scanned_loaded_data(loaded_data);
     std::string loaded_data_block;

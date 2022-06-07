@@ -8,15 +8,14 @@
 SUBJECT *
 search_subject_list
 (std::string input_word,
- std::vector<SUBJECT> initialized_subject_list) {
+ std::vector<SUBJECT *> initialized_subject_list) {
     for (auto & index : initialized_subject_list) {
         // If the archived code matches an initialized subject (from
         // our main function, passed through the
         // initialized_subject_list) then return the pointer to subject
-        if (index.get_code() == input_word) return &index;
+        if (index->get_code() == input_word) return index;
     }
     // If subject is not found, return null pointer
-    std::cout << "Returning NULL" << std::endl;
     return NULL;
 }
 
@@ -25,7 +24,7 @@ search_subject_list
 STUDENT
 interpret_student
 (std::string input_data_block,
- std::vector<SUBJECT> initialized_subject_list) {
+ std::vector<SUBJECT *> initialized_subject_list) {
     std::string str_of_data;
     int step = 0;
     std::string AM;
@@ -70,7 +69,7 @@ interpret_student
                         // If res == NULL then subject was not initialized.
                         // the data is formatted wrongly. Stop trying to
                         // interpret
-                        else throw invalid_student_data();
+                        else throw subject_mismatch();
                     // In even steps we should be looking at subject grades
                     } else {
                         try {
@@ -113,9 +112,10 @@ interpret_student
                     SUBJECT * retrieved_subj = search_subject_list(word,
                                                  initialized_subject_list);
                     /* If res == NULL then subject was not initialized.
-                     * the data is formatted wrongly. Stop trying to
+                     * The data is formatted wrongly. Stop trying to
                      * interpret, throw exception subject_mismatch */
                     if (retrieved_subj) {
+                        std::cout << retrieved_subj->get_name() << std::endl;
                         declared_subjects.push_back(retrieved_subj);
                     } else throw subject_mismatch();
                 }
@@ -125,7 +125,6 @@ interpret_student
     }
     // If this whole process ends without errors, create the student object and
     // return it. Firtly determine what constructor to call
-    //
     STUDENT interpreted_student
         (AM, name, semester, passing_grade_list, declared_subjects);
     return interpreted_student;

@@ -36,7 +36,12 @@ main (int argc, char **argv)
 */
 //
     std::vector<SUBJECT> subject_list = gather_subjects();
-    std::vector<STUDENT> student_list = gather_students(subject_list);
+    std::vector<SUBJECT *> subject_pointer_list;
+    for (auto & subject : subject_list) {
+        SUBJECT * ptr = &subject;
+        subject_pointer_list.push_back(ptr);
+    }
+    std::vector<STUDENT> student_list = gather_students(subject_pointer_list);
     //std::cout << student_list[0].get_name() << std::endl;
     //for (auto stud : student_list) archive(&stud);
 //    //stud.print_all(std::cout);

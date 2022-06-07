@@ -89,16 +89,18 @@ std::vector<SUBJECT *> STUDENT::get_declared_subjects_list (void) {
     return declared_subjects;
 }
 
-void STUDENT::set_passing_grade_list
+void
+STUDENT::set_passing_grade_list
 (std::vector<std::pair<SUBJECT *, float>> input_passing_grade_list) {
     passing_grade_list = input_passing_grade_list;
 }
-void STUDENT::set_declared_subjects_list
+void
+STUDENT::set_declared_subjects_list
 (std::vector<SUBJECT *> input_declared_subjects) {
     declared_subjects = input_declared_subjects;
 }
 /* Function that seaches for subject code or name * and returns the passing
- * grade if the subject is passed by student*/
+ * grade if the subject is passed by student */
 float
 STUDENT::get_passing_grade
 (std::string search_term) {
