@@ -26,6 +26,11 @@ class STUDENT
                  unsigned int input_semester,
                  std::vector <std::pair <SUBJECT *, float>> input_passing_grade_list,
                  std::vector<SUBJECT *> input_declared_subjects);
+        // Constructor (overloaded) to input one of the lists too.
+        STUDENT (std::string  input_AM,
+                 std::string  input_name,
+                 unsigned int input_semester,
+                 std::vector <std::pair <SUBJECT *, float>> input_passing_grade_list);
         // Constructor (overloaded) to duplicate another STUDENT object.
         STUDENT (const STUDENT& source);
         /* Operators */
@@ -55,5 +60,6 @@ class STUDENT
         unsigned int get_semester (void);
         std::vector<SUBJECT *> get_decl_subj (void);
         void add_subject (SUBJECT * inpu_subj);
+        friend std::ostream& operator<<(std::ostream& os, STUDENT &stud);
 };
 #endif

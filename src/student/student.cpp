@@ -48,6 +48,18 @@ STUDENT::STUDENT
     declared_subjects = input_declared_subjects;
 }
 
+// Overloaded to input on list (for ex. in case of loading from disk)
+STUDENT::STUDENT
+(std::string  input_AM,
+ std::string  input_name,
+ unsigned int input_semester,
+ std::vector <std::pair <SUBJECT *, float>> input_passing_grade_list) {
+    AM       = input_AM;
+    name     = input_name;
+    semester = input_semester;
+    passing_grade_list = input_passing_grade_list;
+}
+
 // Constructor (overloaded) to duplicate another STUDENT object.
 //(delegate constructor)
 STUDENT::STUDENT

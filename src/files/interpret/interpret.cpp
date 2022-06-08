@@ -115,7 +115,6 @@ interpret_student
                      * The data is formatted wrongly. Stop trying to
                      * interpret, throw exception subject_mismatch */
                     if (retrieved_subj) {
-                        std::cout << retrieved_subj->get_name() << std::endl;
                         declared_subjects.push_back(retrieved_subj);
                     } else throw subject_mismatch();
                 }

@@ -20,9 +20,9 @@ STUDENT::operator =
     this->set_declared_subjects_list(stud_right.get_declared_subjects_list());
 }
 
-template <typename S>
 std::ostream& operator<<(std::ostream& os, STUDENT &stud) {
     stud.print_all(os);
+    return os;
 }
 
 bool

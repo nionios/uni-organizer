@@ -22,7 +22,6 @@ gather_students
             if (loaded_data_block == "") continue;
             STUDENT loaded_stud(interpret_student(loaded_data_block,
                     initialized_subject_list));
-            loaded_stud.print_all(std::cout);
             loaded_student_list.push_back(loaded_stud);
         }
     } catch (invalid_student_data ex) {
