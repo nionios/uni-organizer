@@ -1,5 +1,5 @@
 #include <subject.hpp>
-#ifndef SUBJECT_HPP
-#define SUBJECT_HPP
+#ifndef CREATE_SUBJECT_HPP
+#define CREATE_SUBJECT_HPP
 SUBJECT create_subject (void);
 #endif

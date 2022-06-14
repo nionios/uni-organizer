@@ -54,6 +54,7 @@ class STUDENT
         std::string get_all_declared_subjects(void);
         std::vector<std::pair<SUBJECT *, float>> get_passing_grade_list(void);
         std::vector<SUBJECT *> get_declared_subjects_list(void);
+        float get_average (void);
         float get_passing_grade (std::string search_term);
         std::string  get_AM (void);
         std::string get_name (void);

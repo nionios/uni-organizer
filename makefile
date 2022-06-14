@@ -5,6 +5,9 @@ make:
  ./src/student/operators.cpp\
  ./src/subject/subject.cpp\
  ./src/helpers/vector_printer.cpp\
+ ./src/helpers/create_student.cpp\
+ ./src/helpers/create_subject.cpp\
+ ./src/helpers/view_subjects.cpp\
  ./src/helpers/archive.cpp\
  ./src/helpers/gather.cpp\
  ./src/files/load/load.cpp\

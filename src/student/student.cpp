@@ -74,11 +74,12 @@ void
 STUDENT::print_all
 (std::ostream &input_stream)
 {
-    input_stream  << "> AM: "                << AM
-                  << " - Name: "             << name
-                  << " - Semester: "         << semester
-                  << " - Passing Grades: "   << get_all_passing_grades()
-                  << " - Declared Subjects: "<< get_all_declared_subjects()
+    input_stream  << "> AM: "                    << AM
+                  << " - Name: "                 << name
+                  << " - Semester: "             << semester
+                  << " - Passing Grades: "       << get_all_passing_grades()
+                  << " - Declared Subjects: "    << get_all_declared_subjects()
+                  << " - Student Grade Average: "<< get_average()
                   << std::endl;
 }
 
@@ -99,6 +100,14 @@ std::vector<std::pair<SUBJECT *, float>> STUDENT::get_passing_grade_list (void) 
 }
 std::vector<SUBJECT *> STUDENT::get_declared_subjects_list (void) {
     return declared_subjects;
+}
+float STUDENT::get_average (void) {
+    float average = 0.0;
+    for (auto & entry : passing_grade_list) {
+        average += entry.second;
+    }
+    average /= passing_grade_list.size();
+    return average;
 }
 
 void
